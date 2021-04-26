@@ -1,0 +1,39 @@
+{
+    "name": "mrgoodbytes8667/string-mask-bundle",
+    "description": "A Symfony/Twig bundle for masking strings",
+    "type": "symfony-bundle",
+    "license": "CC-BY-NC-4.0",
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "symfony/config": "^5.2",
+        "symfony/console": "^5.2",
+        "symfony/dependency-injection": "^5.2",
+        "symfony/framework-bundle": "^5.2",
+        "symfony/serializer": "^5.2",
+        "symfony/string": "^5.2",
+        "symfony/validator": "^5.2",
+        "twig/twig": "^2.12|^3.0"
+    },
+    "require-dev": {
+        "doctrine/common": "^3.0",
+        "mrgoodbytes8667/test-common-faker": ">=0.3.4",
+        "symfony/phpunit-bridge": "^5.2",
+        "symfony/var-dumper": "^5.2"
+    },
+    "authors": [
+        {
+            "name": "MrGoodBytes",
+            "email": "bytes@goodbytes.live"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Bytes\\StringMaskBundle\\": "src/",
+            "Bytes\\StringMaskBundle\\Tests\\": "Tests/"
+        }
+    }
+}
