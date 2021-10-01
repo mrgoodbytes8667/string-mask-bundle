@@ -30,6 +30,9 @@
     "config": {
         "sort-packages": true
     },
+    "conflict": {
+        "phpunit/phpunit": "<9.5 || 9.5.8"
+    },
     "autoload": {
         "psr-4": {
             "Bytes\\StringMaskBundle\\": "src/",
