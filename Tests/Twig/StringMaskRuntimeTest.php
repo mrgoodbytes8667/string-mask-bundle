@@ -84,4 +84,28 @@ class StringMaskRuntimeTest extends TestCase
             yield ['string' => $this->faker->randomAlphanumericString($length)];
         }
     }
+
+    public function testLeft()
+    {
+        $this->assertEquals('abcd', StringMaskRuntime::left('abcde', 4));
+        $this->assertEquals('abcd', StringMaskRuntime::left('abcde', -4));
+        $this->assertEquals('5555', StringMaskRuntime::left(55555, 4));
+
+        $this->assertEmpty(StringMaskRuntime::left('abcde', 0));
+        $this->assertEmpty(StringMaskRuntime::left(''));
+
+        $this->assertEquals('abcde', StringMaskRuntime::left('abcde', 8));
+    }
+
+    public function testRight()
+    {
+        $this->assertEquals('bcde', StringMaskRuntime::right('abcde', 4));
+        $this->assertEquals('bcde', StringMaskRuntime::right('abcde', -4));
+        $this->assertEquals('5555', StringMaskRuntime::right(55555, 4));
+
+        $this->assertEmpty(StringMaskRuntime::right('abcde', 0));
+        $this->assertEmpty(StringMaskRuntime::right(''));
+
+        $this->assertEquals('abcde', StringMaskRuntime::right('abcde', 8));
+    }
 }
