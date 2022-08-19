@@ -1,7 +1,7 @@
 # Pluralize Bundle
 [![Packagist Version](https://img.shields.io/packagist/v/mrgoodbytes8667/string-mask-bundle?logo=packagist&logoColor=FFF&style=flat)](https://packagist.org/packages/mrgoodbytes8667/string-mask-bundle)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/mrgoodbytes8667/string-mask-bundle?logo=php&logoColor=FFF&style=flat)](https://packagist.org/packages/mrgoodbytes8667/string-mask-bundle)
-![Symfony Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.goodbytes.live%2Fshield%2Fsymfony%2F%255E5.2%2520%257C%2520%255E6.0&logoColor=FFF&style=flat)
+![Symfony Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.mrgoodbytes.dev%2Fshield%2Fsymfony%2F%255E5.2%2520%257C%2520%255E6.0&logoColor=FFF&style=flat)
 ![Packagist License](https://img.shields.io/packagist/l/mrgoodbytes8667/string-mask-bundle?logo=creative-commons&logoColor=FFF&style=flat)  
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mrgoodbytes8667/string-mask-bundle/release?label=stable&logo=github&logoColor=FFF&style=flat)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mrgoodbytes8667/string-mask-bundle/tests?logo=github&logoColor=FFF&style=flat)
@@ -49,5 +49,5 @@ return [
 
 ## License
 [![License](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)]("http://creativecommons.org/licenses/by-nc/4.0/)  
-Pluralize Bundle by [MrGoodBytes](https://www.goodbytes.live) is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).  
+Pluralize Bundle by [MrGoodBytes](https://www.mrgoodbytes.dev) is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).  
 Based on a work at [https://github.com/mrgoodbytes8667/string-mask-bundle](https://github.com/mrgoodbytes8667/string-mask-bundle).
