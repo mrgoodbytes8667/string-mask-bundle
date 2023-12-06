@@ -38,5 +38,6 @@
             "Bytes\\StringMaskBundle\\": "src/",
             "Bytes\\StringMaskBundle\\Tests\\": "Tests/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
