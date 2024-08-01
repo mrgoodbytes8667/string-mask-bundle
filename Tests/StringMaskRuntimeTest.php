@@ -16,24 +16,41 @@ class StringMaskRuntimeTest extends TestCase
     /**
      * @dataProvider provide9PlusCharStrings
      */
-    public function testGetMaskedString9Plus($string)
+    public function testGetMaskedString9Plus($string, $unmasked)
     {
-        $masked = StringMaskRuntime::getMaskedString($string, '...');
+        $masked = StringMaskRuntime::getMaskedString($string, mask: StringMaskRuntime::DEFAULT_MASK, unmaskedCharacters: $unmasked);
 
         $input = u($string);
-        $output = $input->slice(0, 3)->append('...')->append($input->slice(-3))->toString();
+        $output = $input->slice(0, $unmasked)->append(StringMaskRuntime::DEFAULT_MASK)->append($input->slice($unmasked * -1))->toString();
 
         self::assertEquals($output, $masked);
     }
 
     public function testGetEmptyMaskedString()
     {
-        self::assertEmpty(StringMaskRuntime::getMaskedString('', '...'));
+        self::assertEmpty(StringMaskRuntime::getMaskedString('', mask: StringMaskRuntime::DEFAULT_MASK));
     }
 
     public function testGetNullMaskedString()
     {
-        self::assertEmpty(StringMaskRuntime::getMaskedString(null, '...'));
+        self::assertEmpty(StringMaskRuntime::getMaskedString(null, mask: StringMaskRuntime::DEFAULT_MASK));
+    }
+
+    /**
+     * @dataProvider provideRangeNegative2Thru1
+     *
+     * @return void
+     */
+    public function testGetMaskedString0Unmasked($unmaskedCharacters)
+    {
+        self::assertSame('a...3', StringMaskRuntime::getMaskedString('abc123', mask: StringMaskRuntime::DEFAULT_MASK, unmaskedCharacters: $unmaskedCharacters));
+    }
+
+    public static function provideRangeNegative2Thru1(): Generator
+    {
+        foreach (range(-2, 1) as $i) {
+            yield $i => [$i];
+        }
     }
 
     /**
@@ -41,7 +58,7 @@ class StringMaskRuntimeTest extends TestCase
      */
     public function testGetMaskedStringShort($string, $output)
     {
-        self::assertEquals($output, StringMaskRuntime::getMaskedString($string, '...'));
+        self::assertEquals($output, StringMaskRuntime::getMaskedString($string, mask: StringMaskRuntime::DEFAULT_MASK));
     }
 
     /**
@@ -49,16 +66,16 @@ class StringMaskRuntimeTest extends TestCase
      */
     public function provideShortCharStrings()
     {
-        yield ['string' => 'abcde12345', 'output' => 'abc...345'];
-        yield ['string' => 'abcde1234', 'output' => 'abc...234'];
-        yield ['string' => 'abcde123', 'output' => '...bcde123'];
-        yield ['string' => 'abcde12', 'output' => '...bcde12'];
-        yield ['string' => 'abc123', 'output' => '...bc123'];
-        yield ['string' => 'abc12', 'output' => '...bc12'];
-        yield ['string' => 'abc1', 'output' => '...bc1'];
-        yield ['string' => 'abc', 'output' => '...bc'];
-        yield ['string' => 'ab', 'output' => '...b'];
-        yield ['string' => 'a', 'output' => '...'];
+        yield 'abcde12345' => ['string' => 'abcde12345', 'output' => 'abc...345'];
+        yield 'abcde1234' => ['string' => 'abcde1234', 'output' => 'abc...234'];
+        yield 'abcde123' => ['string' => 'abcde123', 'output' => 'ab...23'];
+        yield 'abcde12' => ['string' => 'abcde12', 'output' => 'ab...12'];
+        yield 'abc123' => ['string' => 'abc123', 'output' => 'a...3'];
+        yield 'abc12' => ['string' => 'abc12', 'output' => 'a...2'];
+        yield 'abc1' => ['string' => 'abc1', 'output' => 'abc1'];
+        yield 'abc' => ['string' => 'abc', 'output' => 'abc'];
+        yield 'ab' => ['string' => 'ab', 'output' => 'ab'];
+        yield 'a' => ['string' => 'a', 'output' => 'a'];
     }
 
     /**
@@ -68,8 +85,10 @@ class StringMaskRuntimeTest extends TestCase
     {
         self::setupFaker();
 
-        foreach (range(9, 100) as $length) {
-            yield ['string' => $this->faker->randomAlphanumericString($length)];
+        foreach (range(3, 6) as $unmasked) {
+            foreach (range(15, 100) as $length) {
+                yield ['string' => $this->faker->randomAlphanumericString($length), 'unmasked' => $unmasked];
+            }
         }
     }
 

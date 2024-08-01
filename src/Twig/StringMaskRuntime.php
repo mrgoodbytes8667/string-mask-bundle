@@ -8,21 +8,39 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class StringMaskRuntime implements RuntimeExtensionInterface
 {
+    public const DEFAULT_MASK = '...';
+
     /**
-     * Replaces all characters aside from the first 3 and final 3 with the $mask argument
+     * Replaces all characters aside from the first and final 3/$unmaskedCharacters with the $mask argument
+     * If the string is less than $unmaskedCharacters * 2 + length of $mask characters long, it will reduce the mask
+     * length until no longer possible then simply return an unmasked string.
      *
      * @param string $string
+     * @param int    $unmaskedCharacters minimum of 3
      */
-    public static function getMaskedString($string, string $mask = '...'): string
+    public static function getMaskedString($string, string $mask = self::DEFAULT_MASK, int $unmaskedCharacters = 3): string
     {
         if (empty($string)) {
             return '';
         }
-        $string = u($string);
-        if ($string->length() < 9) {
-            return $string->splice($mask, 0, 1)->toString();
+
+        if ($unmaskedCharacters < 1) {
+            $unmaskedCharacters = 1;
         }
-        return $string->splice($mask, 3, $string->length() - 6)->toString();
+
+        $minLength = $unmaskedCharacters * 2 + strlen($mask);
+        $absoluteMinLength = 2 + strlen($mask);
+
+        $string = u($string);
+        if ($string->length() < $absoluteMinLength) {
+            return $string;
+        }
+
+        if ($string->length() < $minLength) {
+            return static::getMaskedString($string, $mask, $unmaskedCharacters - 1);
+        }
+
+        return $string->splice($mask, $unmaskedCharacters, $string->length() - (2 * $unmaskedCharacters))->toString();
     }
 
     /**

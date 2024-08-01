@@ -16,7 +16,7 @@ class IntegrationTest extends IntegrationTestCase
     protected function getExtensions(): array
     {
         return [
-            new StringMaskExtension()
+            new StringMaskExtension(),
         ];
     }
 
@@ -26,7 +26,7 @@ class IntegrationTest extends IntegrationTestCase
     protected function getRuntimeLoaders()
     {
         return [
-            new class implements RuntimeLoaderInterface {
+            new class() implements RuntimeLoaderInterface {
                 public function load($class)
                 {
                     if (StringMaskRuntime::class === $class) {
@@ -42,6 +42,6 @@ class IntegrationTest extends IntegrationTestCase
      */
     protected function getFixturesDir()
     {
-        return __DIR__ . '/Fixtures/';
+        return __DIR__.'/Fixtures/';
     }
 }
