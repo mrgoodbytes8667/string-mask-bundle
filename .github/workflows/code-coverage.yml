@@ -12,7 +12,7 @@ on:
 
 jobs:
   coverage:
-    uses: mrgoodbytes8667/workflows/.github/workflows/code-coverage.yml@php8.0-8.3
+    uses: mrgoodbytes8667/workflows/.github/workflows/code-coverage.yml@php8.2-8.3
     secrets: inherit
     with:
       phpUnitVersion: 9.6
