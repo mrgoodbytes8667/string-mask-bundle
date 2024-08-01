@@ -9,10 +9,11 @@ use Twig\Extension\RuntimeExtensionInterface;
 class StringMaskRuntime implements RuntimeExtensionInterface
 {
     /**
-     * Replaces all characters aside from the first three and final three with the $mask argument
+     * Replaces all characters aside from the first 3 and final 3 with the $mask argument
      *
      * @param string $string
      */
+    public static function getMaskedString($string, string $mask = '...'): string
     {
         if (empty($string)) {
             return '';
