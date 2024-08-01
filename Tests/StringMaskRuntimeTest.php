@@ -1,6 +1,6 @@
 <?php
 
-namespace Bytes\StringMaskBundle\Tests\Twig;
+namespace Bytes\StringMaskBundle\Tests;
 
 use Bytes\Common\Faker\TestFakerTrait;
 use Bytes\StringMaskBundle\Twig\StringMaskRuntime;

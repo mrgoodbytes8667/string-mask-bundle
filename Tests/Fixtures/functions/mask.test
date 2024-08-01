@@ -1,0 +1,26 @@
+--TEST--
+"mask" function
+--TEMPLATE--
+{{ 'abcde12345'|mask }}
+{{ 'abcde1234'|mask }}
+{{ 'abcde123'|mask }}
+{{ 'abcde12'|mask }}
+{{ 'abc123'|mask }}
+{{ 'abc12'|mask }}
+{{ 'abc1'|mask }}
+{{ 'abc'|mask }}
+{{ 'ab'|mask }}
+{{ 'a'|mask }}
+--DATA--
+return []
+--EXPECT--
+abc...345
+abc...234
+...bcde123
+...bcde12
+...bc123
+...bc12
+...bc1
+...bc
+...b
+...
