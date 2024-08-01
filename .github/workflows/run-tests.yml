@@ -12,6 +12,7 @@ on:
       - 0.*
       - 1.*
       - 2.*
+      - 3.*
   schedule:
     # Weekly on Thursdays at 2pm UTC
     - cron:  '0 14 * * 4'
