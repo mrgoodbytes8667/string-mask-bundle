@@ -6,19 +6,15 @@ use Bytes\Common\Faker\TestFakerTrait;
 use Bytes\StringMaskBundle\Twig\StringMaskRuntime;
 use Generator;
 use PHPUnit\Framework\TestCase;
+
 use function Symfony\Component\String\u;
 
-/**
- * Class StringMaskRuntimeTest
- * @package Bytes\StringMaskBundle\Tests\Twig
- */
 class StringMaskRuntimeTest extends TestCase
 {
     use TestFakerTrait;
 
     /**
      * @dataProvider provide9PlusCharStrings
-     * @param $string
      */
     public function testGetMaskedString9Plus($string)
     {
@@ -27,33 +23,25 @@ class StringMaskRuntimeTest extends TestCase
         $input = u($string);
         $output = $input->slice(0, 3)->append('...')->append($input->slice(-3))->toString();
 
-        $this->assertEquals($output, $masked);
+        self::assertEquals($output, $masked);
     }
 
-    /**
-     *
-     */
     public function testGetEmptyMaskedString()
     {
-        $this->assertEmpty(StringMaskRuntime::getMaskedString('', '...'));
+        self::assertEmpty(StringMaskRuntime::getMaskedString('', '...'));
     }
 
-    /**
-     *
-     */
     public function testGetNullMaskedString()
     {
-        $this->assertEmpty(StringMaskRuntime::getMaskedString(null, '...'));
+        self::assertEmpty(StringMaskRuntime::getMaskedString(null, '...'));
     }
 
     /**
      * @dataProvider provideShortCharStrings
-     * @param $string
-     * @param $output
      */
     public function testGetMaskedStringShort($string, $output)
     {
-        $this->assertEquals($output, StringMaskRuntime::getMaskedString($string, '...'));
+        self::assertEquals($output, StringMaskRuntime::getMaskedString($string, '...'));
     }
 
     /**
@@ -78,7 +66,7 @@ class StringMaskRuntimeTest extends TestCase
      */
     public function provide9PlusCharStrings()
     {
-        $this->setupFaker();
+        self::setupFaker();
 
         foreach (range(9, 100) as $length) {
             yield ['string' => $this->faker->randomAlphanumericString($length)];
@@ -87,25 +75,25 @@ class StringMaskRuntimeTest extends TestCase
 
     public function testLeft()
     {
-        $this->assertEquals('abcd', StringMaskRuntime::left('abcde', 4));
-        $this->assertEquals('abcd', StringMaskRuntime::left('abcde', -4));
-        $this->assertEquals('5555', StringMaskRuntime::left(55555, 4));
+        self::assertEquals('abcd', StringMaskRuntime::left('abcde', 4));
+        self::assertEquals('abcd', StringMaskRuntime::left('abcde', -4));
+        self::assertEquals('5555', StringMaskRuntime::left(55555, 4));
 
-        $this->assertEmpty(StringMaskRuntime::left('abcde', 0));
-        $this->assertEmpty(StringMaskRuntime::left(''));
+        self::assertEmpty(StringMaskRuntime::left('abcde', 0));
+        self::assertEmpty(StringMaskRuntime::left(''));
 
-        $this->assertEquals('abcde', StringMaskRuntime::left('abcde', 8));
+        self::assertEquals('abcde', StringMaskRuntime::left('abcde', 8));
     }
 
     public function testRight()
     {
-        $this->assertEquals('bcde', StringMaskRuntime::right('abcde', 4));
-        $this->assertEquals('bcde', StringMaskRuntime::right('abcde', -4));
-        $this->assertEquals('5555', StringMaskRuntime::right(55555, 4));
+        self::assertEquals('bcde', StringMaskRuntime::right('abcde', 4));
+        self::assertEquals('bcde', StringMaskRuntime::right('abcde', -4));
+        self::assertEquals('5555', StringMaskRuntime::right(55555, 4));
 
-        $this->assertEmpty(StringMaskRuntime::right('abcde', 0));
-        $this->assertEmpty(StringMaskRuntime::right(''));
+        self::assertEmpty(StringMaskRuntime::right('abcde', 0));
+        self::assertEmpty(StringMaskRuntime::right(''));
 
-        $this->assertEquals('abcde', StringMaskRuntime::right('abcde', 8));
+        self::assertEquals('abcde', StringMaskRuntime::right('abcde', 8));
     }
 }
