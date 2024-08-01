@@ -1,23 +1,17 @@
 <?php
 
-
 namespace Bytes\StringMaskBundle\Twig;
 
-use Twig\Extension\RuntimeExtensionInterface;
 use function Symfony\Component\String\u;
 
-/**
- * Class StringMaskRuntime
- * @package Bytes\StringMaskBundle\Twig
- */
+use Twig\Extension\RuntimeExtensionInterface;
+
 class StringMaskRuntime implements RuntimeExtensionInterface
 {
     /**
-     * Replaces all characters aside from the first three and final three with the $mask argument
+     * Replaces all characters aside from the first 3 and final 3 with the $mask argument
      *
      * @param string $string
-     * @param string $mask
-     * @return string
      */
     public static function getMaskedString($string, string $mask = '...'): string
     {
@@ -32,11 +26,10 @@ class StringMaskRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * A helper function based on substr[ing] that returns the leftmost $l characters
-     * @param string $s The string
-     * @param integer $l The number of characters to return (defaults to one character)
+     * A helper function based on substr[ing] that returns the leftmost $l characters.
      *
-     * @return string
+     * @param string $s The string
+     * @param int    $l The number of characters to return (defaults to one character)
      */
     public static function left(string $s, int $l = 1): string
     {
@@ -45,10 +38,7 @@ class StringMaskRuntime implements RuntimeExtensionInterface
 
     /**
      * @param string $s The string
-     * @param int $l The number of characters to return
-     * @param bool $negativeOffset
-     *
-     * @return string
+     * @param int    $l The number of characters to return
      */
     private static function leftRightHelper(string $s, int $l, bool $negativeOffset = false): string
     {
@@ -56,14 +46,16 @@ class StringMaskRuntime implements RuntimeExtensionInterface
         if ($l < 1) {
             return '';
         }
+
         if (strlen($s) < 1) {
             return '';
         }
+
         if (strlen($s) <= $l) {
             return $s;
         }
-        if ($negativeOffset) // Right
-        {
+
+        if ($negativeOffset) { // Right
             return substr($s, $l * -1);
         } else { // Left
             return substr($s, 0, $l);
@@ -71,11 +63,10 @@ class StringMaskRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * A helper function based on substr[ing] that returns the rightmost $l characters
-     * @param string $s The string
-     * @param integer $l The number of characters to return (defaults to one character)
+     * A helper function based on substr[ing] that returns the rightmost $l characters.
      *
-     * @return string
+     * @param string $s The string
+     * @param int    $l The number of characters to return (defaults to one character)
      */
     public static function right(string $s, int $l = 1): string
     {
